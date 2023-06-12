@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IGetByIdTeaApplication } from '../interfaces/application/getById.tea.application.interface';
 import { TEA_TYPES } from '../interfaces/types';
 import { IGetByIdTeaService } from '../interfaces/service/getById.tea.service.interface';
@@ -12,11 +12,11 @@ export class GetByIdTeaApplication implements IGetByIdTeaApplication {
   ) {}
 
   async getById(id: number): Promise<TeaDomain> {
-    try {
-      const tea = await this.teaService.getById(id);
-      return tea;
-    } catch (error) {
-      throw error;
+    const tea = await this.teaService.getById(id);
+
+    if (!tea) {
+      throw new NotFoundException(`No tea found with the id: ${id}`);
     }
+    return tea;
   }
 }
