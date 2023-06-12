@@ -1,8 +1,10 @@
 import { CreateTeaApplication } from '../applications/create.tea.application';
+import { DeleteTeaApplication } from '../applications/delete.tea.application';
 import { GetAllTeaApplication } from '../applications/getAll.tea.application';
 import { GetByIdTeaApplication } from '../applications/getById.tea.application';
 import { TEA_TYPES } from '../interfaces/types';
 import { CreateTeaService } from '../services/create.tea.service';
+import { DeleteTeaService } from '../services/delete.tea.service';
 import { GetAllTeaService } from '../services/getAll.tea.service';
 import { GetByIdTeaService } from '../services/getById.tea.service';
 
@@ -18,6 +20,10 @@ const getByIdTeaApp = {
   provide: TEA_TYPES.application.IGetByIdTeaApplication,
   useClass: GetByIdTeaApplication,
 };
+const deleteTeaApp = {
+  provide: TEA_TYPES.application.IDeleteTeaApplication,
+  useClass: DeleteTeaApplication,
+};
 
 const createTeaService = {
   provide: TEA_TYPES.service.ICreateTeaService,
@@ -31,6 +37,10 @@ const getByIdTeaService = {
   provide: TEA_TYPES.service.IGetByIdTeaService,
   useClass: GetByIdTeaService,
 };
+const deleteTeaService = {
+  provide: TEA_TYPES.service.IDeleteTeaService,
+  useClass: DeleteTeaService,
+};
 
 export const teaProvider = [
   createTeaApp,
@@ -39,4 +49,6 @@ export const teaProvider = [
   getAllTeaService,
   getByIdTeaApp,
   getByIdTeaService,
+  deleteTeaApp,
+  deleteTeaService,
 ];
