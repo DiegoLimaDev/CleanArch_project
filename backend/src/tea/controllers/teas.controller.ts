@@ -1,17 +1,23 @@
 import {
+  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  HttpStatus,
   Inject,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Post,
+  Res,
 } from '@nestjs/common';
 import { TEA_TYPES } from '../interfaces/types';
 import { ICreateTeaApplication } from '../interfaces/application/create.tea.application.interface';
 import { TeaDomain } from '../domain/tea.domain';
 import { IGetAllTeaApplication } from '../interfaces/application/getAll.tea.application.interface';
 import { IGetByIdTeaApplication } from '../interfaces/application/getById.tea.application.interface';
+import { IDeleteTeaApplication } from '../interfaces/application/delete.tea.application.interface';
 
 @Controller('tea')
 export class TeasController {
@@ -22,6 +28,8 @@ export class TeasController {
     private getAllTeaApp: IGetAllTeaApplication,
     @Inject(TEA_TYPES.application.IGetByIdTeaApplication)
     private getByIdTeaApp: IGetByIdTeaApplication,
+    @Inject(TEA_TYPES.application.IDeleteTeaApplication)
+    private deleteTeaApp: IDeleteTeaApplication,
   ) {}
 
   @Post()
@@ -38,12 +46,15 @@ export class TeasController {
 
   @Get(':id')
   async getById(@Param('id', new ParseIntPipe()) id: number) {
-    try {
-      const tea = this.getByIdTeaApp.getById(id);
-
-      return tea;
-    } catch (error) {
-      throw error;
+    const tea = this.getByIdTeaApp.getById(id);
+    if (!tea) {
+      throw new NotFoundException(`No tea found with the id: ${id}`);
     }
+    return tea;
+  }
+
+  @Delete('/delete/:id')
+  async delete(@Res() res, @Param('id', new ParseIntPipe()) id: number) {
+    return await this.deleteTeaApp.delete(id);
   }
 }
