@@ -7,9 +7,9 @@ import { TeaDomain } from '../domain/tea.domain';
 
 @Injectable()
 export class CreateTeaService implements ICreateTeaService {
-  constructor(@InjectRepository(Tea) private teasRepo: Repository<Tea>) {}
+  constructor(@InjectRepository(Tea) private teaService: Repository<Tea>) {}
 
   async create(teaDomain: TeaDomain): Promise<TeaDomain> {
-    return this.teasRepo.save(teaDomain);
+    return this.teaService.save(teaDomain);
   }
 }

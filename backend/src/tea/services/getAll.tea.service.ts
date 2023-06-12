@@ -7,9 +7,9 @@ import { TeaDomain } from '../domain/tea.domain';
 
 @Injectable()
 export class GetAllTeaService implements IGetAllTeaService {
-  constructor(@InjectRepository(Tea) private teasRepo: Repository<Tea>) {}
+  constructor(@InjectRepository(Tea) private teaService: Repository<Tea>) {}
 
   async getAll(): Promise<TeaDomain[]> {
-    return this.teasRepo.find();
+    return this.teaService.find();
   }
 }
