@@ -73,6 +73,11 @@ Feel free to use any other library that might help you
 ### What would you improve if given more time?
 Please fill
 
+I mean, I did all the crud operations for the backend, so I would implement this on the frontend as well. I didn't do it because one of the avaliations points it's the reflect of the figma design, the only thing
+I did different from the design is the footer that I put on the page, I hope this is not a problem. I feel like it's a good challenge and I hope that u guys like my project. I was very commited to it.
+I changed the frontend, I removed the next and put the vite intead, but the command is still `npm run dev`.
+For the backend I hosted de imgUrls and used the links. I tried to use a direct img upload for amazon s3, and I actually did it, but i had some issues with the relations.
+
 ---
 
 
