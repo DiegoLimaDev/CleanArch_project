@@ -6,11 +6,11 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class DeleteTeaService implements IDeleteTeaService {
-  constructor(@InjectRepository(Tea) private teaService: Repository<Tea>) {}
+  constructor(@InjectRepository(Tea) private teaRepo: Repository<Tea>) {}
 
   async delete(id: number): Promise<{ deleted: boolean }> {
     try {
-      await this.teaService.delete(id);
+      await this.teaRepo.delete(id);
       return { deleted: true };
     } catch (error) {
       throw error;

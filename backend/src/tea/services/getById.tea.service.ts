@@ -7,10 +7,10 @@ import { TeaDomain } from '../domain/tea.domain';
 
 @Injectable()
 export class GetByIdTeaService implements IGetByIdTeaService {
-  constructor(@InjectRepository(Tea) private teaService: Repository<Tea>) {}
+  constructor(@InjectRepository(Tea) private teaRepo: Repository<Tea>) {}
 
   async getById(id: number): Promise<TeaDomain> {
-    const tea = await this.teaService.findOne(id);
+    const tea = await this.teaRepo.findOne(id);
     return tea;
   }
 }
