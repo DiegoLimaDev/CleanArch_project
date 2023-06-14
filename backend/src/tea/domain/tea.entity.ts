@@ -5,7 +5,7 @@ export class Tea {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true, length: 50 })
+  @Column({ length: 50 })
   title: string;
 
   @Column({ length: 255 })
