@@ -1,16 +1,14 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Inject,
   NotFoundException,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
-  Res,
 } from '@nestjs/common';
 import { TEA_TYPES } from '../interfaces/types';
 import { ICreateTeaApplication } from '../interfaces/application/create.tea.application.interface';
@@ -18,6 +16,8 @@ import { TeaDomain } from '../domain/tea.domain';
 import { IGetAllTeaApplication } from '../interfaces/application/getAll.tea.application.interface';
 import { IGetByIdTeaApplication } from '../interfaces/application/getById.tea.application.interface';
 import { IDeleteTeaApplication } from '../interfaces/application/delete.tea.application.interface';
+import { IUpdateTeaApplication } from '../interfaces/application/update.tea.application.interface';
+import { PartialTeaDomain } from '../domain/partial.tea.domain';
 
 @Controller('tea')
 export class TeasController {
@@ -30,6 +30,8 @@ export class TeasController {
     private getByIdTeaApp: IGetByIdTeaApplication,
     @Inject(TEA_TYPES.application.IDeleteTeaApplication)
     private deleteTeaApp: IDeleteTeaApplication,
+    @Inject(TEA_TYPES.application.IUpdateTeaApplication)
+    private updateTeaApp: IUpdateTeaApplication,
   ) {}
 
   @Post()
@@ -54,7 +56,16 @@ export class TeasController {
   }
 
   @Delete('/delete/:id')
-  async delete(@Res() res, @Param('id', new ParseIntPipe()) id: number) {
+  async delete(@Param('id', new ParseIntPipe()) id: number) {
     return await this.deleteTeaApp.delete(id);
+  }
+
+  @Patch('update/:id')
+  async update(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() data: PartialTeaDomain,
+  ) {
+    const updatedTea = await this.updateTeaApp.update(id, data);
+    return updatedTea;
   }
 }
