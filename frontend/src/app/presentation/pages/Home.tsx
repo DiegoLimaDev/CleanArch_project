@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../application/hooks';
 import { CardsDiplayMap } from '../components/CardsDiplayMap';
 import { PageTitle } from '../components/PageTitle';
 import { Text } from '../common/Text';

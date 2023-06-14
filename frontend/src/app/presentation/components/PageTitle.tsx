@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../application/hooks';
 import { Text } from '../common/Text';
 import { theme } from '../../../styles/theme';
 

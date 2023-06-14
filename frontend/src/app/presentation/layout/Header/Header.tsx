@@ -2,8 +2,8 @@ import { Box, css, styled, useMediaQuery } from '@mui/material';
 import { theme } from '../../../../styles/theme';
 import { BackgroundColor } from '../../common/BackgroundColor';
 import { Text } from '../../common/Text';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { setCoffeeOrTea } from '../../../redux/displayCoffeeOrTea/displayCoffeeOrTea.slice';
+import { useAppDispatch, useAppSelector } from '../../../application/hooks';
+import { setCoffeeOrTea } from '../../../application/displayCoffeeOrTea/displayCoffeeOrTea.slice';
 
 const sessionIndicator = {
   coffee: () => css`
